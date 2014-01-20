@@ -1,0 +1,69 @@
+<project name="expression-evaluation">
+
+    <path id="classpath">
+        <fileset dir="dependencies" includes="*.jar"/>
+    </path>
+
+    <property name="build" location="build"/>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/src"/>
+        <javac srcdir="src" destdir="build/src" includeAntRuntime="false" debug="yes"/>
+    </target>
+
+    <target name="compileTests" depends="compile">
+        <mkdir dir="build/test"/>
+        <javac srcdir="test" destdir="build/test" classpath="build/src" classpathref="classpath"
+               includeAntRuntime="false">
+        </javac>
+    </target>
+
+    <target name="run_tests" depends="compileTests">
+        <junit haltonfailure="yes">
+
+            <classpath>
+                <pathelement location="build/src" />
+                <pathelement location="build/test" />
+                <pathelement location="dependencies/junit-4.10.jar"/>
+            </classpath>
+            <batchtest>
+                <fileset dir="build/test">
+                    <include name="**/*Test*" />
+                </fileset>
+            </batchtest>
+            <formatter type = "brief" usefile = "false"/>
+        </junit>
+    </target>
+
+    <target name="createFolderStructure">
+        <mkdir dir="expression-evaluator"/>
+        <mkdir dir="expression-evaluator/lib"/>
+        <mkdir dir="expression-evaluator/bin"/>
+        <mkdir dir="expression-evaluator/docs"/>
+        <copy todir="expression-evaluator/bin">
+            <fileset dir="tool-script"/>
+        </copy>
+    </target>
+
+    <target name="generateDocs">
+        <javadoc packagenames="soumyagh.expeval.*"
+                 sourcepath="src"
+                 destdir="exp-eval/docs"
+                 author="true" version="true"/>
+    </target>
+
+    <target name="createJar" depends="run_tests,createFolderStructure">
+        <jar destfile="exp-eval/lib/exp-eval.jar" basedir="build/src"/>
+    </target>
+
+    <target name="dist" depends="createJar,generateDocs">
+        <mkdir dir="build/dist"/>
+        <zip destfile="build/dist/exp-eval.zip" basedir="exp-eval" update="true"/>
+        <delete dir="exp-eval"></delete>
+    </target>
+
+</project>

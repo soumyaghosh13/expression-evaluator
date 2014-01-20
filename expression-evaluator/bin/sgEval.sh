@@ -1,0 +1,1 @@
+java -cp $EXP_EVAL/lib/exp-eval.jar kashishm.expeval.cli.ExpEvalMain "${@}"
