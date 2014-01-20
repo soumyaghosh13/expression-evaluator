@@ -1,4 +1,4 @@
-<project name="expression-evaluation">
+<project name="exp-eval">
 
     <path id="classpath">
         <fileset dir="dependencies" includes="*.jar"/>
@@ -40,11 +40,11 @@
     </target>
 
     <target name="createFolderStructure">
-        <mkdir dir="expression-evaluator"/>
-        <mkdir dir="expression-evaluator/lib"/>
-        <mkdir dir="expression-evaluator/bin"/>
-        <mkdir dir="expression-evaluator/docs"/>
-        <copy todir="expression-evaluator/bin">
+        <mkdir dir="exp-eval"/>
+        <mkdir dir="exp-eval/lib"/>
+        <mkdir dir="exp-eval/bin"/>
+        <mkdir dir="exp-eval/docs"/>
+        <copy todir="exp-eval/bin">
             <fileset dir="tool-script"/>
         </copy>
     </target>
