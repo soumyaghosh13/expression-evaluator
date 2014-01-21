@@ -6,13 +6,13 @@ import static junit.framework.Assert.assertEquals;
 
 public class ExpEvaluatorTest {
 
-    @Test
-    public void onlyOneNumber() throws Exception {
-        ExpEvaluator eval = new ExpEvaluator();
-        String[] args = {"1"};
-        int result = eval.getResultByEvaluating(args);
-        assertEquals(result,1);
-    }
+//    @Test
+//    public void onlyOneNumber() throws Exception {
+//        ExpEvaluator eval = new ExpEvaluator();
+//        String[] args = {"1"};
+//        int result = eval.getResultByEvaluating(args);
+//        assertEquals(result,1);
+//    }
 
     @Test
     public void AdditionForTwoPositiveIntegers() throws Exception {
