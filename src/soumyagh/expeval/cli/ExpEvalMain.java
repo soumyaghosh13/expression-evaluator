@@ -3,9 +3,9 @@ package soumyagh.expeval.cli;
 import soumyagh.expeval.lib.ExpEvaluator;
 
 public class ExpEvalMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ExpEvaluator eval = new ExpEvaluator();
-        int result = eval.hello(args);
+        int result = eval.getResultByEvaluating(args);
         System.out.println(result);
     }
 }
