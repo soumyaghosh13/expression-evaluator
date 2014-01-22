@@ -36,4 +36,3 @@ Expression-Evaluator
 
 * Run shell-script on command :-
     eg. `sgEval.sh "10 + 15 - 5 * 5 / 2 ^ 2"
-    
