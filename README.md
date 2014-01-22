@@ -25,3 +25,15 @@ Expression-Evaluator
 
 * Run shell-script on command :-
     eg. `sgEval.sh "2 + 3"
+
+
+## Release 0.2
+
+### Evaluator allows user to perform Multiple Operation At a Time.
+
+* User has to give two operands and one operator.
+    eg. `25 + 22 + 27` , `25 - 21 / 2` , `25 * 4 ^ 2`
+
+* Run shell-script on command :-
+    eg. `sgEval.sh "10 + 15 - 5 * 5 / 2 ^ 2"
+    
