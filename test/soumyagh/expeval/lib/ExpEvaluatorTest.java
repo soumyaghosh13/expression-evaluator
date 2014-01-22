@@ -57,8 +57,8 @@ public class ExpEvaluatorTest {
     @Test
     public void DivisionOfOddNumberGiveInteger() throws Exception {
         ExpEvaluator eval = new ExpEvaluator();
-        String[] args = {"5 / 2"};
-        int expected = 2; //expected should be 2.5 but No Float Handling in this version.
+        String[] args = {"22 / 3"};
+        int expected = 7;
         int result = eval.getResultByEvaluating(args);
         assertEquals(result,expected);
     }

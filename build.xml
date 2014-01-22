@@ -124,7 +124,6 @@
         <mkdir dir="exp-eval"/>
         <mkdir dir="exp-eval/lib"/>
         <mkdir dir="exp-eval/bin"/>
-        <mkdir dir="exp-eval/docs"/>
         <copy todir="exp-eval/bin">
             <fileset dir="tool-script"/>
         </copy>
@@ -142,7 +141,7 @@
         <jar destfile="exp-eval/lib/exp-eval_0.2.jar" basedir="build/src"/>
     </target>
 
-    <target name="dist" depends="createJar,generateDocs">
+    <target name="dist" depends="createJar">
         <mkdir dir="build/dist"/>
         <zip destfile="build/dist/exp-eval_0.2.zip" basedir="exp-eval" update="true"/>
         <delete dir="exp-eval"></delete>
