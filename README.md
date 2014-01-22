@@ -13,7 +13,7 @@ This tool is able to solve arithmatic expression from left to right.
     _____
 
     Add this folder to an environment variable.
-         Name : `EXP_EVAL`
+         Name : `EVALUATOR_HOME`
          Value : Path of your scripts folder.
     _____
 
