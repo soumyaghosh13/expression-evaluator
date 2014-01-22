@@ -1,1 +1,1 @@
-java -cp $EVALUATOR_HOME/lib/exp-eval.jar soumyagh.expeval.cli.ExpEvalMain "${@}"
+java -cp $EVALUATOR_HOME/lib/exp-eval_0.1.jar soumyagh.expeval.cli.ExpEvalMain "${@}"

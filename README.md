@@ -1,30 +1,27 @@
-Expression Evaluator
+Expression-Evaluator
 ====================
 
-Version 0.0
+## Release 0.1
 
-This tool is able to solve arithmatic expression from left to right.
+### Evaluator allows user to perform addition,subtraction,multiplication,division and power of two positive integers.
 
-    Steps to Use Expression Evaluator.
-    _____
+* User has to give two operands and one operator.
+    eg. `25 + 22` , `25 - 22` , `25 * 2`, `24 / 2` , `2 ^ 10`
 
-    Get the jar file and scripts and paste it inside
-    your folder.
-    _____
+* Without Space expression is not allowed.
+    eg. `25+22`
 
-    Add this folder to an environment variable.
-         Name : `EVALUATOR_HOME`
-         Value : Path of your scripts folder.
-    _____
+* Evaluator only works for positive integers.
 
+* NOTE : Evaluator does not handle Single Value.
 
-Version 0.1
+## How To Use ExpressionEvaluator On Your System :-
 
-This Version of Evaluator can handel only two positive integer with a operator at a time.
-Number Should give with space.
-Example -> sgEval.sh “2 + 3 ” return 5.
+* Extract the provided `exp-eval_0.1.zip`
 
-Float Value is not calculated in this version.
-Example - sgEval.sh “2 / 3” return 2 instead of 2.5.
+* Create an environment variable as `EVALUATOR_HOME` with the address to your unzipped directory.
 
-bug -  sgEval.sh “1” sould be a valid expression and return 1 but it fails in this version.
+* Put this environment variable to your path as :- `%EVALUATOR_HOME%/bin`
+
+* Run shell-script on command :-
+    eg. `sgEval.sh "2 + 3"
