@@ -1,4 +1,4 @@
-<project name="exp-eval">
+<project name="exp-eval" default="Jar">
 
     <path id="classpath">
         <fileset dir="dependencies" includes="*.jar"/>
@@ -121,13 +121,13 @@
             description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>
 
     <target name="createFolderStructure">
-        <mkdir dir="exp-eval"/>
-        <mkdir dir="exp-eval/lib"/>
-        <mkdir dir="exp-eval/bin"/>
-        <copy todir="exp-eval/bin">
+        <mkdir dir="expression-evaluator"/>
+        <mkdir dir="expression-evaluator/lib"/>
+        <mkdir dir="expression-evaluator/bin"/>
+        <copy todir="expression-evaluator/bin">
             <fileset dir="tool-script"/>
         </copy>
-        <copy file = "README.md" tofile = "exp-eval/README.md"/>
+        <copy file = "README.md" tofile = "expression-evaluator/README.md"/>
     </target>
 
     <target name="generateDocs">
@@ -141,10 +141,14 @@
         <jar destfile="exp-eval/lib/exp-eval_0.4.jar" basedir="build/src"/>
     </target>
 
+    <target name="Jar" depends="run_tests,createFolderStructure,coverage">
+        <jar destfile="build/dist/lib/expression-evaluator.jar" basedir="build/src/"/>
+    </target>
+
     <target name="dist" depends="createJar">
         <mkdir dir="build/dist"/>
-        <zip destfile="build/dist/exp-eval_0.4.zip" basedir="exp-eval" update="true"/>
-        <delete dir="exp-eval"></delete>
+        <zip destfile="build/dist/lib/expression-evaluator.zip" basedir="expression-evaluator" update="true"/>
+        <delete dir="expression-evaluator"></delete>
     </target>
 
 </project>
