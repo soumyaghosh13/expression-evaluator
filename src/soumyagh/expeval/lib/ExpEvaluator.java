@@ -6,15 +6,21 @@ import java.util.List;
 public class ExpEvaluator {
     public double getResultByEvaluating(String[] args) throws Exception {
         List<Double> operands = new ArrayList<Double>();
-        String exp = args[0];
+        String exp = refactorInput(args[0]);
         List<String> parenthesesExp = new ArrayList<String>();
-        gettingExpressionFromMultipleParentheses(args[0], parenthesesExp);
+        gettingExpressionFromMultipleParentheses(exp, parenthesesExp);
         for (String s : parenthesesExp)
             exp = handlingParentheses(exp, s);
         List<String> operators = getOperatorsOperands(exp, operands);
         if (operands.size() < 2) return operands.get(0);
         Operations op = new Operations();
         return getResultForMultipleOperations(operands, operators, op);
+    }
+
+    private String refactorInput(String exp) {
+        return exp.replaceAll(" +", "").replaceAll("\\+", " + ").replaceAll("\\/", " / ")
+                .replaceAll("\\-", " - ").replaceAll("\\*", " * ").replaceAll("\\^", " ^ ")
+                .replaceAll(" - ", " -").replaceFirst("^ - ", "-");
     }
 
     private void gettingExpressionFromMultipleParentheses(String arg, List<String> parenthesesExp) {

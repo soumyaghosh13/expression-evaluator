@@ -3,6 +3,7 @@ package soumyagh.expeval.lib;
 import java.util.HashMap;
 import java.util.Map;
 
+
 interface Operatable {
     void runOperation(double a, double b);
 }

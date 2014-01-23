@@ -11,18 +11,18 @@
     </target>
 
     <target name="init">
-        <mkdir dir="build/code-coverage/instrumented" />
-        <mkdir dir="build/code-coverage/reports/xml" />
-        <mkdir dir="build/code-coverage/reports/html" />
-        <mkdir dir="build/code-coverage/coverage/xml" />
-        <mkdir dir="build/code-coverage/coverage/summaryxml" />
-        <mkdir dir="build/code-coverage/coverage/html" />
+        <mkdir dir="build/code-coverage/instrumented"/>
+        <mkdir dir="build/code-coverage/reports/xml"/>
+        <mkdir dir="build/code-coverage/reports/html"/>
+        <mkdir dir="build/code-coverage/coverage/xml"/>
+        <mkdir dir="build/code-coverage/coverage/summaryxml"/>
+        <mkdir dir="build/code-coverage/coverage/html"/>
     </target>
 
     <path id="cobertura.classpath">
         <fileset dir="dependencies/code-coverage">
-            <include name="cobertura-2.0.3.jar" />
-            <include name="lib/**/*.jar" />
+            <include name="cobertura-2.0.3.jar"/>
+            <include name="lib/**/*.jar"/>
         </fileset>
     </path>
     <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
@@ -30,7 +30,7 @@
     <target name="compile" depends="init">
         <mkdir dir="build/src"/>
         <javac srcdir="src" destdir="build/src" includeAntRuntime="false" debug="yes">
-            <classpath refid="cobertura.classpath" />
+            <classpath refid="cobertura.classpath"/>
         </javac>
     </target>
 
@@ -38,7 +38,7 @@
         <mkdir dir="build/test"/>
         <javac srcdir="test" destdir="build/test" classpath="build/src" classpathref="classpath"
                includeAntRuntime="false">
-            <classpath refid="cobertura.classpath" />
+            <classpath refid="cobertura.classpath"/>
         </javac>
     </target>
 
@@ -46,25 +46,25 @@
         <junit haltonfailure="yes">
 
             <classpath>
-                <pathelement location="build/src" />
-                <pathelement location="build/test" />
+                <pathelement location="build/src"/>
+                <pathelement location="build/test"/>
                 <pathelement location="dependencies/junit-4.10.jar"/>
             </classpath>
             <batchtest>
                 <fileset dir="build/test">
-                    <include name="**/*Test*" />
+                    <include name="**/*Test*"/>
                 </fileset>
             </batchtest>
-            <formatter type = "brief" usefile = "false"/>
+            <formatter type="brief" usefile="false"/>
         </junit>
     </target>
     <target name="instrument" depends="run_tests">
         <delete file="cobertura.ser"/>
-        <delete dir="build/code-coverage/instrumented" />
+        <delete dir="build/code-coverage/instrumented"/>
 
         <cobertura-instrument todir="build/code-coverage/instrumented">
             <fileset dir="build/src">
-                <include name="**/*.class" />
+                <include name="**/*.class"/>
             </fileset>
         </cobertura-instrument>
     </target>
@@ -73,39 +73,39 @@
         <junit fork="yes" dir="." failureProperty="test.failed">
             <classpath>
                 <pathelement location="build/code-coverage/instrumented"/>
-                <pathelement location="build/src" />
-                <pathelement location="build/test" />
+                <pathelement location="build/src"/>
+                <pathelement location="build/test"/>
                 <pathelement location="dependencies/junit-4.10.jar"/>
             </classpath>
 
-            <classpath refid= "cobertura.classpath"/>
+            <classpath refid="cobertura.classpath"/>
 
-            <formatter type="xml" />
-            <test name="testcase" todir="build/code-coverage/reports/xml" if="testcase" />
+            <formatter type="xml"/>
+            <test name="testcase" todir="build/code-coverage/reports/xml" if="testcase"/>
             <batchtest todir="build/code-coverage/reports/xml" unless="testcase">
                 <fileset dir="test">
-                    <include name="**/*Test.java" />
+                    <include name="**/*Test.java"/>
                 </fileset>
             </batchtest>
         </junit>
         <junitreport todir="build/code-coverage/reports/xml">
             <fileset dir="build/code-coverage/reports/xml">
-                <include name="TEST-*.xml" />
+                <include name="TEST-*.xml"/>
             </fileset>
-            <report format="frames" todir="build/code-coverage/reports/html" />
+            <report format="frames" todir="build/code-coverage/reports/html"/>
         </junitreport>
     </target>
 
     <target name="coverage-check">
-        <cobertura-check branchrate="34" totallinerate="100" />
+        <cobertura-check branchrate="34" totallinerate="100"/>
     </target>
 
     <target name="coverage-report">
-        <cobertura-report srcdir="src" destdir="build/code-coverage/coverage/xml" format="xml" />
+        <cobertura-report srcdir="src" destdir="build/code-coverage/coverage/xml" format="xml"/>
     </target>
 
     <target name="summary-coverage-report">
-        <cobertura-report srcdir="src" destdir="build/code-coverage/coverage/summaryxml" format="summaryXml" />
+        <cobertura-report srcdir="src" destdir="build/code-coverage/coverage/summaryxml" format="summaryXml"/>
     </target>
 
     <target name="alternate-coverage-report">
@@ -120,28 +120,20 @@
             depends="instrument,test-coverage,coverage-report,summary-coverage-report,alternate-coverage-report"
             description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>
 
-    <target name="createFolderStructure">
-        <mkdir dir="expression-evaluator"/>
-        <mkdir dir="expression-evaluator/lib"/>
-        <mkdir dir="expression-evaluator/bin"/>
-        <copy todir="expression-evaluator/bin">
-            <fileset dir="tool-script"/>
-        </copy>
-        <copy file = "README.md" tofile = "expression-evaluator/README.md"/>
-    </target>
+
 
     <target name="generateDocs">
         <javadoc packagenames="soumyagh.expeval.*"
                  sourcepath="src"
-                 destdir="exp-eval/docs"
+                 destdir="expression-evaluator/docs"
                  author="true" version="true"/>
     </target>
 
-    <target name="createJar" depends="run_tests,createFolderStructure,coverage">
-        <jar destfile="exp-eval/lib/exp-eval_0.4.jar" basedir="build/src"/>
+    <target name="createJar" depends="run_tests,coverage">
+        <jar destfile="expression-evaluator/lib/expression-evaluator_0.4.jar" basedir="build/src"/>
     </target>
 
-    <target name="Jar" depends="run_tests,createFolderStructure,coverage">
+    <target name="Jar" depends="run_tests,coverage">
         <jar destfile="build/dist/lib/expression-evaluator.jar" basedir="build/src/"/>
     </target>
 
