@@ -11,6 +11,9 @@ Expression-Evaluator
 * Without Space expression is not allowed.
     eg. `25+22`
 
+* Float Answer round up in Integer.
+    eg. ` 22 / 3` give 7 instead of 7.33
+
 * Evaluator only works for positive integers.
 
 * NOTE : Evaluator does not handle Single Value.
@@ -34,5 +37,10 @@ Expression-Evaluator
 * User has to give two operands and one operator.
     eg. `25 + 22 + 27` , `25 - 21 / 2` , `25 * 4 ^ 2`
 
+* Handels Negetive Integers.
+    eg. `22 - 25` give `-3`
+
 * Run shell-script on command :-
-    eg. `sgEval.sh "10 + 15 - 5 * 5 / 2 ^ 2"
+    eg. `sgEval.sh "10 + 15 - 5 * 5 / 2 ^ 2
+
+
