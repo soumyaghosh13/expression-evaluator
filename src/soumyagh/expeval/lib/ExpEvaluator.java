@@ -4,58 +4,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExpEvaluator {
-    public int getResultByEvaluating(String[] args) throws Exception {
-        List<Integer> operands = new ArrayList<Integer>();
+    public double getResultByEvaluating(String[] args) throws Exception {
+        List<Double> operands = new ArrayList<Double>();
         String exp = args[0];
-        if (args[0].contains("(")) exp = handlingParentheses(args[0]);
+        List<String> parenthesesExp = new ArrayList<String>();
+        gettingExpressionFromMultipleParentheses(args[0], parenthesesExp);
+        for (String s : parenthesesExp)
+            exp = handlingParentheses(exp, s);
         List<String> operators = getOperatorsOperands(exp, operands);
         if (operands.size() < 2) return operands.get(0);
         Operations op = new Operations();
-        int result = getResultForMultipleOperations(operands, operators, op);
-        return result;
+        return getResultForMultipleOperations(operands, operators, op);
     }
 
-    private int getResultForMultipleOperations(List<Integer> operands, List<String> operators, Operations op) throws Exception {
-        int result = op.getOperationResult(operators.get(0), operands.get(0), operands.get(1));
-        for (int i = 1; i < operators.size(); i++) {
-            result = op.getOperationResult(operators.get(i), result, operands.get(i + 1));
+    private void gettingExpressionFromMultipleParentheses(String arg, List<String> parenthesesExp) {
+        if (arg.contains("(")) {
+            String[] ex = arg.split("\\(");
+            for (String s : ex) {
+                int index = s.indexOf(")");
+                if (index > 0) parenthesesExp.add(s.substring(0, index));
+            }
         }
+    }
+
+    private double getResultForMultipleOperations(List<Double> operands, List<String> operators, Operations op) throws Exception {
+        double result = op.getOperationResult(operators.get(0), operands.get(0), operands.get(1));
+        for (int i = 1; i < operators.size(); i++)
+            result = op.getOperationResult(operators.get(i), result, operands.get(i + 1));
         return result;
     }
 
-    private List<String> getOperatorsOperands(String exp, List<Integer> operands) {
+    private List<String> getOperatorsOperands(String exp, List<Double> operands) {
         String[] splittedExp = exp.split(" ");
         List<String> operators = new ArrayList<String>();
-        for (String s : splittedExp) {
+        for (String s : splittedExp)
             try {
-                operands.add(Integer.parseInt(s));
+                operands.add(Double.parseDouble(s));
             } catch (Exception ex) {
                 operators.add(s);
             }
-        }
         return operators;
     }
 
-    private String handlingParentheses(String exp) throws Exception {
-        StringBuffer parenthesesExp = new StringBuffer(exp);
+    private String handlingParentheses(String exp, String parenthesesExp) throws Exception {
+        StringBuffer userExp = new StringBuffer(exp);
         int startingIndex = exp.indexOf("(");
         int endingIndex = exp.indexOf(")");
-        String SExp = parenthesesExp.substring(startingIndex + 1, endingIndex);
-        List<Integer> parentheseOperands = new ArrayList<Integer>();
+        List<Double> parentheseOperands = new ArrayList<Double>();
 
-        List<String> parenthesesOperators = getOperatorsOperands(SExp.toString(), parentheseOperands);
-
+        List<String> parenthesesOperators = getOperatorsOperands(parenthesesExp, parentheseOperands);
         validatingNumOfOperands(parentheseOperands, parenthesesOperators);
-
         Operations op = new Operations();
-        int result = getResultForMultipleOperations(parentheseOperands, parenthesesOperators, op);
-        parenthesesExp.replace(startingIndex, endingIndex + 1, Integer.toString(result));
-        return parenthesesExp.toString();
+        double result = getResultForMultipleOperations(parentheseOperands, parenthesesOperators, op);
+        userExp.replace(startingIndex, endingIndex + 1, Double.toString(result));
+        return userExp.toString();
     }
 
-    private void validatingNumOfOperands(List<Integer> operands, List<String> operators) {
+    private void validatingNumOfOperands(List<Double> operands, List<String> operators) {
         if (operands.size() < 2) {
-            operands.add(0);
+            operands.add(0.0);
             operators.add("+");
         }
     }

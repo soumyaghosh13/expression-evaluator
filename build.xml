@@ -138,12 +138,12 @@
     </target>
 
     <target name="createJar" depends="run_tests,createFolderStructure,coverage">
-        <jar destfile="exp-eval/lib/exp-eval_0.3.jar" basedir="build/src"/>
+        <jar destfile="exp-eval/lib/exp-eval_0.4.jar" basedir="build/src"/>
     </target>
 
     <target name="dist" depends="createJar">
         <mkdir dir="build/dist"/>
-        <zip destfile="build/dist/exp-eval_0.3.zip" basedir="exp-eval" update="true"/>
+        <zip destfile="build/dist/exp-eval_0.4.zip" basedir="exp-eval" update="true"/>
         <delete dir="exp-eval"></delete>
     </target>
 

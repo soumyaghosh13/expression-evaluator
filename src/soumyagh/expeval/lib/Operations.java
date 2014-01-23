@@ -1,22 +1,20 @@
 package soumyagh.expeval.lib;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 interface Operatable {
-    void runOperation(int a, int b);
+    void runOperation(double a, double b);
 }
 
 public class Operations {
-    int result;
+    double result;
 
-    public int getOperationResult(String operator, int a, int b) throws Exception {
+    public double getOperationResult(String operator, double a, Double b) throws Exception {
         Map<String, Operatable> methodMap = new HashMap<String, Operatable>();
 
         methodMap.put("+", new Operatable() {
-            public void runOperation(int a, int b) {
+            public void runOperation(double a, double b) {
                 result = a + b;
             }
 
@@ -24,7 +22,7 @@ public class Operations {
         });
 
         methodMap.put("-", new Operatable() {
-            public void runOperation(int a, int b) {
+            public void runOperation(double a, double b) {
                 result = a - b;
             }
 
@@ -32,7 +30,7 @@ public class Operations {
         });
 
         methodMap.put("*", new Operatable() {
-            public void runOperation(int a, int b) {
+            public void runOperation(double a, double b) {
                 result = a * b;
             }
 
@@ -40,7 +38,7 @@ public class Operations {
         });
 
         methodMap.put("/", new Operatable() {
-            public void runOperation(int a, int b) {
+            public void runOperation(double a, double b) {
                 result = a / b;
             }
 
@@ -48,8 +46,8 @@ public class Operations {
         });
 
         methodMap.put("^", new Operatable() {
-            public void runOperation(int a, int b) {
-                result = (int) Math.pow((double) a, (double) b);
+            public void runOperation(double a, double b) {
+                result = Math.pow((double) a, (double) b);
             }
 
             ;
