@@ -7,11 +7,19 @@ import static junit.framework.Assert.assertEquals;
 public class ExpEvaluatorTest {
 
     @Test
+    public void EvaluatingExpressionWithOneOperand() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {"5"};
+        int result = eval.getResultByEvaluating(args);
+        assertEquals(5, result);
+    }
+
+    @Test
     public void AdditionForTwoPositiveIntegers() throws Exception {
         ExpEvaluator eval = new ExpEvaluator();
         String[] args = {"2 + 3"};
         int result = eval.getResultByEvaluating(args);
-        assertEquals(result,5);
+        assertEquals(result, 5);
     }
 
     @Test
@@ -19,7 +27,7 @@ public class ExpEvaluatorTest {
         ExpEvaluator eval = new ExpEvaluator();
         String[] args = {"5 - 2"};
         int result = eval.getResultByEvaluating(args);
-        assertEquals(result,3);
+        assertEquals(result, 3);
     }
 
     @Test
@@ -27,7 +35,7 @@ public class ExpEvaluatorTest {
         ExpEvaluator eval = new ExpEvaluator();
         String[] args = {"5 * 5"};
         int result = eval.getResultByEvaluating(args);
-        assertEquals(result,25);
+        assertEquals(result, 25);
     }
 
     @Test
@@ -35,7 +43,7 @@ public class ExpEvaluatorTest {
         ExpEvaluator eval = new ExpEvaluator();
         String[] args = {"4 / 2"};
         int result = eval.getResultByEvaluating(args);
-        assertEquals(result,2);
+        assertEquals(result, 2);
     }
 
     @Test
@@ -43,7 +51,7 @@ public class ExpEvaluatorTest {
         ExpEvaluator eval = new ExpEvaluator();
         String[] args = {"2 ^ 10"};
         int result = eval.getResultByEvaluating(args);
-        assertEquals(result,1024);
+        assertEquals(result, 1024);
     }
 
     @Test
@@ -52,7 +60,7 @@ public class ExpEvaluatorTest {
         String[] args = {"22 / 3"};
         int expected = 7;
         int result = eval.getResultByEvaluating(args);
-        assertEquals(result,expected);
+        assertEquals(result, expected);
     }
 
     @Test
@@ -112,12 +120,21 @@ public class ExpEvaluatorTest {
     }
 
     @Test
+    public void EvaluatingExpressionWithSingleValueWithInABracket() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {"1 + (1)"};
+        int result = eval.getResultByEvaluating(args);
+        assertEquals(2, result);
+    }
+
+    @Test
     public void OnePairOfBracketEvaluateFirst() throws Exception {
         ExpEvaluator eval = new ExpEvaluator();
         String[] args = {"1 + (5 - 3)"};
         int result = eval.getResultByEvaluating(args);
         assertEquals(3, result);
     }
+
     @Test
     public void BracketShouldEvaluateFirstThenLeftToRight() throws Exception {
         ExpEvaluator eval = new ExpEvaluator();
@@ -126,18 +143,5 @@ public class ExpEvaluatorTest {
         assertEquals(10, result);
     }
 
-    @Test
-    public void EvaluatingExpressionWithSingleValueWithInABracket() throws Exception {
-        ExpEvaluator eval = new ExpEvaluator();
-        String[] args = {"1 + (1)"};
-        int result = eval.getResultByEvaluating(args);
-        assertEquals(2, result);
-    }
-    @Test
-    public void EvaluatingExpressionWithOneOperand() throws Exception {
-        ExpEvaluator eval = new ExpEvaluator();
-        String[] args = {"5"};
-        int result = eval.getResultByEvaluating(args);
-        assertEquals(5, result);
-    }
+
 }
