@@ -51,7 +51,7 @@ Expression-Evaluator
 * User can give one pair of bracket in expression.
 	eg.  `10 + (2 + 3)`
 
-* Handels Single Value.
+* Handels Single Integer.
 	eg. `1`
 
 * Run shell-script on command :-
