@@ -70,3 +70,12 @@ Expression-Evaluator
 * Run shell-script on command :-
     eg. `sgEval.sh "(10.5 + 4.5) + (15.3 - 5.7)"`
 
+
+## Release 0.4
+
+### Multiple Space are trimmed.
+### Without Space Expression are Allowed.
+
+* Run shell-script on command :-
+    eg. `sgEval.sh "(10+4)+(15-5.7)"`
+
