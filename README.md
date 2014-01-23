@@ -44,7 +44,7 @@ Expression-Evaluator
     eg. `sgEval.sh "10 + 15 - 5 * 5 / 2 ^ 2"`
 
 
-## Release 0.2
+## Release 0.3
 
 ### One Pair of Bracket Supported.
 
@@ -56,3 +56,16 @@ Expression-Evaluator
 
 * Run shell-script on command :-
     eg. `sgEval.sh "10 + (15 - 5)"`
+
+
+
+## Release 0.4
+
+### Multiple Pair of Bracket Supported.
+### Float Value Supported.
+
+* User can give one pair of bracket in expression.
+	eg.  `(10 + 5) + (2 + 3)`
+
+* Run shell-script on command :-
+    eg. `sgEval.sh "(10.5 + 4.5) + (15.3 - 5.7)"`
