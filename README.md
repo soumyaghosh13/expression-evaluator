@@ -57,9 +57,9 @@ Expression-Evaluator
 * Run shell-script on command :-
     eg. `sgEval.sh "10 + (15 - 5)"`
 
+* Release 0.4 Canceled.
 
-
-## Release 0.4
+## Release 0.5
 
 ### Multiple Pair of Bracket Supported.
 ### Float Value Supported.
@@ -71,7 +71,7 @@ Expression-Evaluator
     eg. `sgEval.sh "(10.5 + 4.5) + (15.3 - 5.7)"`
 
 
-## Release 0.4
+## Release 0.6
 
 ### Multiple Space are trimmed.
 ### Without Space Expression are Allowed.
@@ -79,3 +79,9 @@ Expression-Evaluator
 * Run shell-script on command :-
     eg. `sgEval.sh "(10+4)+(15-5.7)"`
 
+
+## Release 0.7
+
+* Negetive Number Handeled Properly.
+
+* Bug Fixed of Minus Operand and Negetive Number. Example - `-2 - -2`

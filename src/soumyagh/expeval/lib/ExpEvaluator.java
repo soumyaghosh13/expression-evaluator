@@ -20,7 +20,7 @@ public class ExpEvaluator {
     private String refactorInput(String exp) {
         return exp.replaceAll(" +", "").replaceAll("\\+", " + ").replaceAll("\\/", " / ")
                 .replaceAll("\\-", " - ").replaceAll("\\*", " * ").replaceAll("\\^", " ^ ")
-                .replaceAll(" - ", " -").replaceFirst("^ - ", "-");
+                .replaceAll("  - ", " -").replaceFirst("^ - ", "-");
     }
 
     private void gettingExpressionFromMultipleParentheses(String arg, List<String> parenthesesExp) {
@@ -52,7 +52,7 @@ public class ExpEvaluator {
         return operators;
     }
 
-    private String handlingParentheses(String exp, String parenthesesExp) throws Exception {
+    private String handlingParentheses(String exp,String parenthesesExp) throws Exception {
         StringBuffer userExp = new StringBuffer(exp);
         int startingIndex = exp.indexOf("(");
         int endingIndex = exp.indexOf(")");

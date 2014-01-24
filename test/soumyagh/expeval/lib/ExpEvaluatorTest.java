@@ -21,6 +21,7 @@ public class ExpEvaluatorTest {
         double result = eval.getResultByEvaluating(args);
         assertEquals(3.0, result);
     }
+
     @Test
     public void MultiplicationForTwoNumbers() throws Exception {
         ExpEvaluator eval = new ExpEvaluator();
@@ -28,6 +29,7 @@ public class ExpEvaluatorTest {
         double result = eval.getResultByEvaluating(args);
         assertEquals(2.0, result);
     }
+
     @Test
     public void DivisionForTwoNumbers() throws Exception {
         ExpEvaluator eval = new ExpEvaluator();
@@ -35,13 +37,15 @@ public class ExpEvaluatorTest {
         double result = eval.getResultByEvaluating(args);
         assertEquals(7.0, result);
     }
-//    @Test
-//    public void SubtractionForTwoNumbers() throws Exception {
-//        ExpEvaluator eval = new ExpEvaluator();
-//        String[] args = {"25 - 2"};
-//        double result = eval.getResultByEvaluating(args);
-//        assertEquals(23.0, result);
-//    }
+
+    @Test
+    public void SubtractionForTwoNumbers() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {"25 - 2"};
+        double result = eval.getResultByEvaluating(args);
+        assertEquals(23.0, result);
+    }
+
     @Test
     public void PowerOfTwoNumbers() throws Exception {
         ExpEvaluator eval = new ExpEvaluator();
@@ -65,13 +69,14 @@ public class ExpEvaluatorTest {
         double result = eval.getResultByEvaluating(args);
         assertEquals(12.0, result);
     }
-//    @Test
-//    public void subtractionOfMultipleNumber() throws Exception {
-//        ExpEvaluator eval = new ExpEvaluator();
-//        String[] args = {"100 - 50 - 30 -10"};
-//        double result = eval.getResultByEvaluating(args);
-//        assertEquals(10.0, result);
-//    }
+
+    @Test
+    public void subtractionOfMultipleNumber() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {"100 - 50 - 30 - 10"};
+        double result = eval.getResultByEvaluating(args);
+        assertEquals(10.0, result);
+    }
 
     @Test
     public void multiplicationOfMultipleNumbers() throws Exception {
@@ -87,6 +92,38 @@ public class ExpEvaluatorTest {
         String[] args = {"100 / 5 / 2 / 2"};
         double result = eval.getResultByEvaluating(args);
         assertEquals(5.0, result);
+    }
+
+    @Test
+    public void combinationOfMultiplePower() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {"2 ^ 2 ^ 2"};
+        double result = eval.getResultByEvaluating(args);
+        assertEquals(16.0, result);
+    }
+
+    @Test
+    public void combinationOfAdditionAndSubtraction() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {"5 + 5 - 2 - 8"};
+        double result = eval.getResultByEvaluating(args);
+        assertEquals(0.0, result);
+    }
+
+    @Test
+    public void combinationOfMultiplicationAndDivision() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {"10 * 10 / 5 / 4"};
+        double result = eval.getResultByEvaluating(args);
+        assertEquals(5.0, result);
+    }
+
+    @Test
+    public void combinationOfMultiplicationAndPower() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {"2 + 2 ^ 2"};
+        double result = eval.getResultByEvaluating(args);
+        assertEquals(16.0, result);
     }
 
     @Test
@@ -127,6 +164,14 @@ public class ExpEvaluatorTest {
         String[] args = {"1 + (2)"};
         double result = eval.getResultByEvaluating(args);
         assertEquals(3.0, result);
+    }
+
+    @Test
+    public void PowerWithinABracket() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {"1 + (2 ^ 2)"};
+        double result = eval.getResultByEvaluating(args);
+        assertEquals(5.0, result);
     }
 
 
@@ -171,6 +216,14 @@ public class ExpEvaluatorTest {
     }
 
     @Test
+    public void PowerWithFloat() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {"5.5 ^ 2.1"};
+        double result = eval.getResultByEvaluating(args);
+        assertEquals(35.87250030349099, result);
+    }
+
+    @Test
     public void evaluateAnswerAsDecimal() throws Exception {
         ExpEvaluator eval = new ExpEvaluator();
         String[] args = {"2 + ( 22 / 3) + 1"};
@@ -193,11 +246,22 @@ public class ExpEvaluatorTest {
         double result = eval.getResultByEvaluating(args);
         assertEquals(10.333333333333333, result);
     }
-//    @Test
-//    public void testgetResultByGivingNegativeNumbers() throws Exception {
-//        ExpEvaluator eval = new ExpEvaluator();
-//        String[] args = {" -2 +1"};
-//        double result = eval.getResultByEvaluating(args);
-//        assertEquals(-1.0, result);
-//    }
+
+    @Test
+    public void startingWithNegetiveNumber() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {" -2 +1"};
+        double result = eval.getResultByEvaluating(args);
+        assertEquals(-1.0, result);
+    }
+
+    @Test
+    public void minusAsNegetiveNumberAndMinusAsOperand() throws Exception {
+        ExpEvaluator eval = new ExpEvaluator();
+        String[] args = {"-2 - -2"};
+        double result = eval.getResultByEvaluating(args);
+        assertEquals(0.0, result);
+    }
+
 }
+
