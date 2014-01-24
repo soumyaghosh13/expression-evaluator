@@ -1,12 +1,10 @@
 package soumyagh.expeval.cli;
 
-import soumyagh.expeval.lib.ExpEvaluator;
-
+import soumyagh.expeval.lib.EvaluateExpression;
 
 public class ExpEvalMain {
     public static void main(String[] args) throws Exception {
-        ExpEvaluator eval = new ExpEvaluator();
-        double result = eval.getResultByEvaluating(args);
-        System.out.println(result);
+        EvaluateExpression evaluator = new EvaluateExpression(args[0]);
+        System.out.println(evaluator.expressionEvaluation());
     }
 }
