@@ -3,14 +3,17 @@ package soumyagh.expeval.lib;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EvaluateExpression {
-    private String expression;
+public class Expression {
 
-    public EvaluateExpression(String expression) {
+    private String expression;
+    private final SpaceHandler spaceHandler = new SpaceHandler(this);
+    private final BracketHandler bracketHandler = new BracketHandler(this);
+
+    public Expression(String expression) {
         this.expression = expression;
     }
 
-    private double evaluateExpression(String expression) throws Exception {
+    public double evaluateExpression(String expression) throws Exception {
         String[] splittedExpression = expression.trim().split(" ");
         List<String> operators = new ArrayList<String>();
         List<Double> operands = new ArrayList<Double>();
@@ -19,7 +22,7 @@ public class EvaluateExpression {
     }
 
     private double getResultForMultipleOperations(List<String> operators, List<Double> operands) throws Exception {
-        SingleOperationEvaluator operations = new SingleOperationEvaluator();
+        Evaluator operations = new Evaluator();
         double result = operands.get(0);
         for (int i = 0; i < operators.size(); i++)
             result = operations.getOperationResult(operators.get(i), result, operands.get(i + 1));
@@ -39,37 +42,22 @@ public class EvaluateExpression {
     private double expressionEvaluation(String expression) throws Exception {
         StringBuilder exp = new StringBuilder(expression);
         if (exp.indexOf("(") > -1) {
-            handlingParentheses(exp);
+            bracketHandler.handlingParentheses(exp);
             return expressionEvaluation(exp.toString());
         }
         return evaluateExpression(exp.toString());
     }
 
     private void handlingParentheses(StringBuilder expression) throws Exception {
-        int openingBracketIndex = -1;
-        int closingBracketIndex = -1;
-        for (int index = 0; index < expression.length(); index++) {
-            if ('(' == expression.charAt(index))
-                openingBracketIndex = index;
-            if (')' == expression.charAt(index)) {
-                closingBracketIndex = index;
-                break;
-            }
-        }
-        String parenthesesExpression = expression.substring(openingBracketIndex + 1, closingBracketIndex);
-        double result = evaluateExpression(parenthesesExpression);
-        expression.replace(openingBracketIndex, closingBracketIndex + 1, Double.toString(result));
+        bracketHandler.handlingParentheses(expression);
     }
 
-    private String refactorInput() {
-        return this.expression.replaceAll(" +", "").replaceAll("\\+", " + ").replaceAll("\\/", " / ")
-                .replaceAll("\\-", " - ").replaceAll("\\*", " * ").replaceAll("\\^", " ^ ")
-                .replaceAll("\\(", "( ").replaceAll("\\)", " )").replaceAll("  - ", " -")
-                .replaceFirst("^ - ", "-");
-    }
-
-    public double expressionEvaluation() throws Exception {
-        String expressionWithoutSpaces = this.refactorInput();
+    public double spaceHandling() throws Exception {
+        String expressionWithoutSpaces = spaceHandler.refactorInput();
         return expressionEvaluation(expressionWithoutSpaces);
+    }
+
+    public String getExpression() {
+        return expression;
     }
 }

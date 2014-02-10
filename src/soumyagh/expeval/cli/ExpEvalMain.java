@@ -1,10 +1,10 @@
 package soumyagh.expeval.cli;
 
-import soumyagh.expeval.lib.EvaluateExpression;
+import soumyagh.expeval.lib.Expression;
 
 public class ExpEvalMain {
     public static void main(String[] args) throws Exception {
-        EvaluateExpression evaluator = new EvaluateExpression(args[0]);
-        System.out.println(evaluator.expressionEvaluation());
+        Expression evaluator = new Expression(args[0]);
+        System.out.println(evaluator.spaceHandling());
     }
 }

@@ -3,11 +3,7 @@ package soumyagh.expeval.lib;
 import java.util.HashMap;
 import java.util.Map;
 
-interface Evaluable {
-    void runOperation(double a, double b);
-}
-
-public class SingleOperationEvaluator {
+public class Evaluator {
     double result;
 
     public double getOperationResult(String operator, double a, Double b) throws Exception {
